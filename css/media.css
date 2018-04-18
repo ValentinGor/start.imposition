@@ -1,0 +1,55 @@
+/*Медиазапросы диапазонные*/
+@media (min-width: 1200px) and (max-width: 1366px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+@media (min-width: 575px) and (max-width: 767px) {
+
+}
+
+@media (min-width: 480px) and (max-width: 574px) {
+
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+
+}
+
+
+
+/*Медиазапросы от 0*/
+@media (min-width: 0) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 0) and (max-width: 991px) {
+
+}
+
+@media (min-width: 0) and (max-width: 767px) {
+
+}
+
+@media (min-width: 0) and (max-width: 574px) {
+
+}
+
+@media (min-width: 0) and (max-width: 479px) {
+
+}
+
+@media (min-width: 0) and (max-width: 319px) {
+
+}
