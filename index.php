@@ -4,7 +4,7 @@
 <!--Site: https://vk.com/gorbatenko1984-->
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
