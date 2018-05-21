@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.carousel.min.css">
     <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.theme.default.min.css">
 
+    <!-- jQueryFormStyler CSS -->
+    <link rel="stylesheet" href="libs/jQueryFormStyler/jquery.formstyler.css">
+    <link rel="stylesheet" href="libs/jQueryFormStyler/jquery.formstyler.theme.css">
+
     <!-- Style CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/media.css">
@@ -42,6 +46,7 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/owlcarousel2-2.2.1/owl.carousel.min.js"></script>
+<script src="libs/jQueryFormStyler/jquery.formstyler.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
