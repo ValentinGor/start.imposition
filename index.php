@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="libs/font-awesome-4.7.0/css/font-awesome.min.css">
 
     <!-- Owlcarousel CSS -->
-    <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.carousel.min.css">
+    <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.theme.default.min.css">
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -41,7 +41,7 @@
 <script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="libs/owlcarousel2-2.2.1/dist/owl.carousel.min.js"></script>
+<script src="libs/owlcarousel2-2.2.1/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
