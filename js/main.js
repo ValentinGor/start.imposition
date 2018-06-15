@@ -5,7 +5,6 @@
 
 
 // Инициализация owlCarousel
-
 $(document).ready(function () {
     $(".owl-carousel").owlCarousel();
 });
@@ -18,9 +17,15 @@ $(document).ready(function () {
 // поле для выбора файла <input type="file">.
 // поле для ввода чисел <input type="number">.
 // раскрывающийся список <select>;
-
 (function ($) {
     $(function () {
         $('input, select').styler();
     });
 })(jQuery);
+
+
+// Инициализация Fancybox
+$().fancybox({
+    selector : '[data-fancybox="gallery"]',
+    loop     : true
+});

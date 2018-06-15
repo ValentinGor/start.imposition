@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.carousel.min.css">
     <link rel="stylesheet" href="libs/owlcarousel2-2.2.1/owl.theme.default.min.css">
 
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="libs/fancybox/jquery.fancybox.min.css">
+
     <!-- jQueryFormStyler CSS -->
     <link rel="stylesheet" href="libs/jQueryFormStyler/jquery.formstyler.css">
     <link rel="stylesheet" href="libs/jQueryFormStyler/jquery.formstyler.theme.css">
@@ -46,6 +49,7 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="libs/owlcarousel2-2.2.1/owl.carousel.min.js"></script>
+<script src="libs/fancybox/jquery.fancybox.min.js"></script>
 <script src="libs/jQueryFormStyler/jquery.formstyler.min.js"></script>
 <script src="js/main.js"></script>
 </body>
