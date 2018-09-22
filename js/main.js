@@ -9,7 +9,6 @@ $(document).ready(function () {
     $(".owl-carousel").owlCarousel();
 });
 
-
 // Инициализация jQueryFormStyler
 // Для активации плагина примените метод .styler к тегам, которые хотите стилизовать
 // флажок <input type="checkbox">;
@@ -23,9 +22,13 @@ $(document).ready(function () {
     });
 })(jQuery);
 
-
 // Инициализация Fancybox
 $().fancybox({
-    selector : '[data-fancybox="gallery"]',
-    loop     : true
+    selector: '[data-fancybox="gallery"]',
+    loop: true
+});
+
+//Инициализация маски ввода телефона
+jQuery(function ($) {
+    $(".maskedinput").mask("+38 ( 999 ) 999-99-99");
 });
