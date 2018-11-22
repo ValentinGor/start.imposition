@@ -15,11 +15,11 @@
 
 }
 
-@media (min-width: 575px) and (max-width: 767px) {
+@media (min-width: 576px) and (max-width: 767px) {
 
 }
 
-@media (min-width: 480px) and (max-width: 574px) {
+@media (min-width: 480px) and (max-width: 575px) {
 
 }
 
@@ -46,7 +46,7 @@
 
 }
 
-@media (min-width: 0) and (max-width: 574px) {
+@media (min-width: 0) and (max-width: 575px) {
 
 }
 
