@@ -4,7 +4,7 @@
 
 Разработан для быстрого развертывания базового шаблона для верстки и создания в последующем тем для Wordpress.
 ## JS компоненты (библиотеки JS)
-#### jQuery https://jquery.com/
+#### jQuery 3.4.1 https://jquery.com/
 jQuery - используется минифицированный файл jquery - 3.4.1.min.js.
 #### Bootstrap версии 4.3.1 https://getbootstrap.com/  
 Bootstrap - используется минимальный набор компонентов. подключены файлы - bootstrap.min.css bootstrap.min.js  popper.min.js (включен файл bootstrap.min.js.map bootstrap.min.css.map).
