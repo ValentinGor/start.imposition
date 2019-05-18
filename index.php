@@ -35,13 +35,13 @@
 <h1>Hello, world!</h1>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/maskedinput.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/popper.min.js"></script>
 <script src="libs/owlcarousel/owl.carousel.min.js"></script>
 <script src="libs/fancybox/jquery.fancybox.min.js"></script>
 <script src="libs/jQueryFormStyler/jquery.formstyler.min.js"></script>
+<script src="js/maskedinput.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
