@@ -1,17 +1,38 @@
-//Подключаем модули галпа
+// *************************************************************************************** //
+// ********************* Список подключенных модулей (плагинов) Gulp ********************* //
+// *************************************************************************************** //
+
+// Собственно сам Gulp
 const gulp = require('gulp');
+
+// Модуль (плагин) для очистки директории
+const cleans = require('del');
+
+// Модуль (плагин) для конкатенации (объединения файлов)
 const concat = require('gulp-concat');
-const autoprefixer = require('gulp-autoprefixer');
+
+// Модуль (плагин) для очистки и минификации файлов CSS
 const cleanCSS = require('gulp-clean-css');
+
+// Модуль (плагин) для очистки и минификации файлов JS
 const uglify = require('gulp-uglify-es').default;
-const del = require('del');
+
+// Модуль (плагин) для расстановки автопрефиксов в CSS
+const autoprefixer = require('gulp-autoprefixer');
+
+// Модуль (плагин) для отслеживания изменений в файлах
 const browserSync = require('browser-sync').create();
 
-//Порядок подключения css файлов
+
+// *************************************************************************************** //
+// ************************************** Константы ************************************** //
+// *************************************************************************************** //
+
+// Получаем список файлов CSS и определяем их порядок подключения
 const cssFiles = [
     './src/css/normalize.css',
     './src/css/bootstrap.min.css',
-    './src/libs/font-awesome/css/font-awesome.min.css',
+    './src/css/font-awesome.min.css',
     './src/libs/owlcarousel/owl.carousel.min.css',
     './src/libs/owlcarousel/owl.theme.default.min.css',
     './src/libs/fancybox/jquery.fancybox.min.css',
@@ -21,7 +42,7 @@ const cssFiles = [
     './src/css/media.css'
 ];
 
-//Порядок подключения js файлов
+// Получаем список файлов JS и определяем их порядок подключения
 const jsFiles = [
     './src/js/jquery-3.4.1.min.js',
     './src/js/bootstrap.min.js',
@@ -33,90 +54,122 @@ const jsFiles = [
     './src/js/main.js'
 ];
 
-//Список файлов для копирования
+// Получаем список файлов для копирования
 const src = {
     copy_files: [
-        'src/*.php',
+        'src/*.html',
+        'src/*.ico',
         'src/fonts/*',
         'src/img/*',
-        'src/libs/jquery-ui/*',
-        'src/libs/jquery-ui/external/*',
-        'src/libs/jquery-ui/external/jquery/*',
-        'src/libs/jquery-ui/images/*',
-        'src/libs/owl-carousel/*',
-        'src/libs/owl-carousel/assets/*',
-        'src/libs/slick/*',
-        'src/libs/slick/fonts/*',
         'src/uploads/*',
     ]
 };
 
+// Получаем список файлов для отслеживания изменения HTML
+const htmlFiles = [
+    './src/*.html'
+];
+
+
+// *************************************************************************************** //
+// *************************************** Функции *************************************** //
+// *************************************************************************************** //
+
+// Функция на стили CSS
 function styles() {
     return gulp.src(cssFiles)
+
+        // Конкатенация (Объединения) файлов CSS
         .pipe(concat('style.css'))
 
-        //Добавить префиксы
+        // Добавить префиксы
         .pipe(autoprefixer({
             //browsers: ['last 2 versions'],
             cascade: false
         }))
 
-        //Минификация CSS
+        // Минификация CSS
         .pipe(cleanCSS({
             level: 2
         }))
 
+        // Копирование CSS в папку build
         .pipe(gulp.dest('./build/css'))
-        .pipe(browserSync.stream());
+
+        // Отслеживания изменения CSS
+        .pipe(browserSync.stream())
 }
 
-//Таск на скрипты JS
+// Функция на скрипты JS
 function scripts() {
-    //Шаблон для поиска файлов JS
-    //Всей файлы по шаблону './src/js/**/*.js'
     return gulp.src(jsFiles)
-        //Объединение файлов в один
+
+        // Конкатенация (Объединения) файлов CSS
         .pipe(concat('script.js'))
+
         //Минификация JS
         .pipe(uglify({
-            toplevel: false
+            toplevel: true
         }))
-        //Выходная папка для скриптов
+
+        // Копирование JS в папку build
         .pipe(gulp.dest('./build/js'))
-        .pipe(browserSync.stream());
+
+        // Отслеживания изменения JS
+        .pipe(browserSync.stream())
 }
 
-//Удалить всё в указанной папке
+// Функция на файлы HTML
+function files() {
+    return gulp.src(htmlFiles)
+
+        // Копирование HTML в папку build
+        .pipe(gulp.dest('./build/'))
+}
+
+// Удалить всё в указанной папке
 function clean() {
-    return del(['build/*'])
+    return cleans(['build/*'])
 }
 
 
-//Просматривать файлы
+// Просматривать файлы
 function watch() {
+    // Инициализация сервера
     browserSync.init({
         server: {
-            baseDir: "./build"
+            baseDir: "./build/"
         }
     });
-    //Следить за CSS файлами
+
+    // Следить за CSS файлами
     gulp.watch('./src/css/**/*.css', styles);
-    //Следить за JS файлами
+
+    // Следить за JS файлами
     gulp.watch('./src/js/**/*.js', scripts);
-    //При изменении HTML запустить синхронизацию
-    gulp.watch("./*.html").on('change', browserSync.reload);
+
+    // Следить за HTML файлами
+    gulp.watch("./src/*.html", files);
+
+    // При изменении HTML запустить синхронизацию
+    gulp.watch("./src/*.html").on('change', browserSync.reload);
 }
 
-//Таск вызывающий функцию styles
+
+// *************************************************************************************** //
+// **************************************** Таски **************************************** //
+// *************************************************************************************** //
+
+// Таск вызывающий функцию styles
 gulp.task('styles', styles);
 
-//Таск вызывающий функцию scripts
+// Таск вызывающий функцию scripts
 gulp.task('scripts', scripts);
 
-//Таск для очистки папки build
-gulp.task('del', clean);
+// Таск для очистки папки build
+gulp.task('cleans', clean);
 
-// копирование файлов в build
+// Таск для копирование файлов в build
 gulp.task('copyFiles', function () {
     return gulp.src(src.copy_files)
         .pipe(gulp.dest(function (file) {
@@ -125,11 +178,11 @@ gulp.task('copyFiles', function () {
         }));
 });
 
-//Таск для отслеживания изменений
+// Таск для отслеживания изменений
 gulp.task('watch', watch);
 
-//Таск для удаления файлов в папке build и запуск styles и scripts
+// Таск для удаления файлов в папке build и запуск styles и scripts
 gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, "copyFiles")));
 
-//Таск запускает таск build и watch последовательно
+// Таск запускает таск build и watch последовательно
 gulp.task('dev', gulp.series('build', 'watch'));
