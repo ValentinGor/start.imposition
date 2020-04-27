@@ -23,6 +23,13 @@ const autoprefixer = require('gulp-autoprefixer');
 // Модуль (плагин) для отслеживания изменений в файлах
 const browserSync = require('browser-sync').create();
 
+// Модуль (плагин) для вставки темплейтов
+const rigger = require('gulp-rigger');
+
+// Модуль (плагин) для оптимизации изображений .jpg .png
+const imagemin = require('imagemin');
+const imageminJpegtran = require('imagemin-jpegtran');
+const imageminPngquant = require('imagemin-pngquant');
 
 // *************************************************************************************** //
 // ************************************** Константы ************************************** //
@@ -60,7 +67,7 @@ const src = {
         'src/*.html',
         'src/*.ico',
         'src/fonts/*',
-        'src/img/*',
+        // 'src/img/*',
         'src/uploads/*',
     ]
 };
@@ -119,13 +126,30 @@ function scripts() {
         .pipe(browserSync.stream())
 }
 
+(async () => {
+    await imagemin(['src/img/*.{jpg,png}'], {
+        destination: 'build/img',
+        plugins: [
+            imageminJpegtran(),
+            imageminPngquant({
+                quality: [0.6, 0.8]
+            })
+        ]
+    });
+    // console.log(files);
+})();
+
+
 // Функция на файлы HTML
 function files() {
     return gulp.src(htmlFiles)
+        // Прогоним через rigger
+        .pipe(rigger())
 
         // Копирование HTML в папку build
         .pipe(gulp.dest('./build/'))
 }
+
 
 // Удалить всё в указанной папке
 function clean() {
@@ -150,9 +174,11 @@ function watch() {
 
     // Следить за HTML файлами
     gulp.watch("./src/*.html", files);
+    gulp.watch("./src/**/*.html", files);
 
     // При изменении HTML запустить синхронизацию
     gulp.watch("./src/*.html").on('change', browserSync.reload);
+    gulp.watch("./src/**/*.html").on('change', browserSync.reload);
 }
 
 
@@ -172,6 +198,9 @@ gulp.task('cleans', clean);
 // Таск для копирование файлов в build
 gulp.task('copyFiles', function () {
     return gulp.src(src.copy_files)
+        // Прогоним через rigger
+        .pipe(rigger())
+
         .pipe(gulp.dest(function (file) {
             let path = file.base;
             return path.replace('src', 'build');

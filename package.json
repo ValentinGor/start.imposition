@@ -1,10 +1,9 @@
 {
   "name": "start.imposition",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "Стартовый шаблон для верстки. Разработан для быстрого развертывания базового шаблона для верстки и создания в последующем тем для Wordpress.",
   "main": "index.js",
   "dependencies": {
-    "bootstrap": "^4.4.1",
     "gulp": "^4.0.2"
   },
   "devDependencies": {
@@ -13,7 +12,11 @@
     "gulp-autoprefixer": "^7.0.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify-es": "^2.0.0"
+    "gulp-rigger": "^0.5.8",
+    "gulp-uglify-es": "^2.0.0",
+    "imagemin": "^7.0.1",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-pngquant": "^8.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,12 +29,15 @@
     "JS",
     "Gulp",
     "gulp",
+    "gulp 4",
+    "gulp npm",
     "gulp watch",
     "gulp autoprefixer",
-    "gulp 4",
     "gulp concat",
-    "gulp npm",
     "gulp uglify",
+    "imagemin",
+    "imagemin-jpegtran",
+    "imagemin-pngquant",
     "education"
   ],
   "author": "Valentin Gorbatenko",
