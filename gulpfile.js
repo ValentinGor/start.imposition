@@ -50,7 +50,6 @@ const jsFiles = [
 const src = {
     copy_files: [
         'src/*.html',
-        'src/*.ico',
         'src/fonts/*',
         // 'src/img/*',
         'src/uploads/*',
