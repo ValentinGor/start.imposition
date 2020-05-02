@@ -37,27 +37,12 @@ const imageminPngquant = require('imagemin-pngquant');
 
 // Получаем список файлов CSS и определяем их порядок подключения
 const cssFiles = [
-    './src/css/normalize.css',
-    './src/css/bootstrap.min.css',
-    './src/css/font-awesome.min.css',
-    './src/libs/owlcarousel/owl.carousel.min.css',
-    './src/libs/owlcarousel/owl.theme.default.min.css',
-    './src/libs/fancybox/jquery.fancybox.min.css',
-    './src/libs/jQueryFormStyler/jquery.formstyler.css',
-    './src/libs/jQueryFormStyler/jquery.formstyler.theme.css',
     './src/css/style.css',
     './src/css/media.css'
 ];
 
 // Получаем список файлов JS и определяем их порядок подключения
 const jsFiles = [
-    './src/js/jquery-3.4.1.min.js',
-    './src/js/bootstrap.min.js',
-    './src/js/popper.min.js',
-    './src/libs/owlcarousel/owl.carousel.min.js',
-    './src/libs/fancybox/jquery.fancybox.min.js',
-    './src/libs/jQueryFormStyler/jquery.formstyler.min.js',
-    './src/js/maskedinput.min.js',
     './src/js/main.js'
 ];
 
