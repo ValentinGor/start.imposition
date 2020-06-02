@@ -4,9 +4,9 @@
 
 Разработан для быстрого развертывания базового шаблона для верстки и создания в последующем тем для Wordpress.
 ## JS компоненты (библиотеки JS)
-#### jQuery 3.4.1 https://jquery.com/
+#### jQuery 3.5.1 https://jquery.com/
 jQuery - используется минифицированный файл jquery - 3.4.1.min.js.
-#### Bootstrap версии 4.3.1 https://getbootstrap.com/  
+#### Bootstrap версии 4.5.0 https://getbootstrap.com/  
 Bootstrap - используется минимальный набор компонентов. подключены файлы - bootstrap.min.css bootstrap.min.js  popper.min.js (включен файл bootstrap.min.js.map bootstrap.min.css.map).
 #### Owl Carousel 2 https://owlcarousel2.github.io/OwlCarousel2/
 Owl Carousel 2 - используется минифицированный файл - owl.carousel.min.js.
@@ -21,7 +21,7 @@ jQuery Masked Input - используется минифицированный 
 ## CSS компоненты (библиотеки CSS)
 ### Normalize.css https://github.com/necolas/normalize.css
 При создании темы для Wordpress подразумевается что каждый разработчик будет генерировать собственную стартовую тему с помощью сервиса https://underscores.me/. 
-В данную сборку уже включен файл normalize.css v8.0.0 который генерируется сервисом, для того чтобы верстка и готовая тема были идентичны. Версия normalize.css v8.0.0 отличается от официальной 
+В данную сборку уже включен файл normalize.css v8.0.1 который генерируется сервисом, для того чтобы верстка и готовая тема были идентичны. Версия normalize.css v8.0.0 отличается от официальной 
 и имеет в себе включенные дополнительные классы специально для Wordpress.
 ### Подключены CSS с включенных JS библиотек 
 Bootstrap  // Owl Carousel 2 // fancybox // jQuery Form Styler
