@@ -26,11 +26,6 @@ const browserSync = require('browser-sync').create();
 // Модуль (плагин) для вставки темплейтов
 const rigger = require('gulp-rigger');
 
-// Модуль (плагин) для оптимизации изображений .jpg .png
-const imagemin = require('imagemin');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminPngquant = require('imagemin-pngquant');
-
 // *************************************************************************************** //
 // ************************************** Константы ************************************** //
 // *************************************************************************************** //
@@ -50,8 +45,6 @@ const jsFiles = [
 const src = {
     copy_files: [
         'src/*.html',
-        'src/fonts/*',
-        // 'src/img/*',
         'src/uploads/*',
     ]
 };
@@ -110,20 +103,6 @@ function scripts() {
         .pipe(browserSync.stream())
 }
 
-(async () => {
-    await imagemin(['src/img/*.{jpg,png}'], {
-        destination: 'build/img',
-        plugins: [
-            imageminJpegtran(),
-            imageminPngquant({
-                quality: [0.6, 0.8]
-            })
-        ]
-    });
-    // console.log(files);
-})();
-
-
 // Функция на файлы HTML
 function files() {
     return gulp.src(htmlFiles)
@@ -170,6 +149,12 @@ function watch() {
 // **************************************** Таски **************************************** //
 // *************************************************************************************** //
 
+// Таск для Копирования картинок
+gulp.task('img', function () {
+    return gulp.src('src/img/**/*')
+        .pipe(gulp.dest('build/img'))
+})
+
 // Таск вызывающий функцию styles
 gulp.task('styles', styles);
 
@@ -178,6 +163,18 @@ gulp.task('scripts', scripts);
 
 // Таск для очистки папки build
 gulp.task('cleans', clean);
+
+// Таск для Копирования htaccess
+gulp.task('htaccess', function () {
+    return gulp.src('src/.htaccess')
+        .pipe(gulp.dest('build'))
+})
+
+// Таск для Копирования favicon
+gulp.task('favicon', function () {
+    return gulp.src('src/favicon.ico')
+        .pipe(gulp.dest('build'))
+})
 
 // Таск для копирование файлов в build
 gulp.task('copyFiles', function () {
@@ -195,7 +192,7 @@ gulp.task('copyFiles', function () {
 gulp.task('watch', watch);
 
 // Таск для удаления файлов в папке build и запуск styles и scripts
-gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, "copyFiles")));
+gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, "img", "htaccess", "favicon", "copyFiles")));
 
 // Таск запускает таск build и watch последовательно
 gulp.task('dev', gulp.series('build', 'watch'));

@@ -6,6 +6,7 @@ wp-content/upgrade/*
 wp-content/uploads/*
 wp-content/plugins/*
 wp-content/backups-dup-pro/*
+wp-content/themes/twentytwenty/*
 wp-content/themes/twentynineteen/*
 wp-content/themes/twentyseventeen/*
 wp-content/themes/twentysixteen/*
@@ -13,8 +14,6 @@ wp-content/themes/index.php
 wp-content/index.php
 wp-includes/*
 
-.gitignore
-.htaccess
 .index.php
 license.txt
 readme.html
