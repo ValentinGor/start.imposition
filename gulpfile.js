@@ -11,188 +11,116 @@ const cleans = require('del');
 // Модуль (плагин) для конкатенации (объединения файлов)
 const concat = require('gulp-concat');
 
-// Модуль (плагин) для очистки и минификации файлов CSS
-const cleanCSS = require('gulp-clean-css');
-
 // Модуль (плагин) для очистки и минификации файлов JS
 const uglify = require('gulp-uglify-es').default;
 
-// Модуль (плагин) для расстановки автопрефиксов в CSS
-const autoprefixer = require('gulp-autoprefixer');
-
-// Модуль (плагин) для отслеживания изменений в файлах
-const browserSync = require('browser-sync').create();
-
-// Модуль (плагин) для вставки темплейтов
-const rigger = require('gulp-rigger');
-
-// *************************************************************************************** //
-// ************************************** Константы ************************************** //
-// *************************************************************************************** //
-
-// Получаем список файлов CSS и определяем их порядок подключения
-const cssFiles = [
-    './src/css/style.css',
-    './src/css/media.css'
-];
-
-// Получаем список файлов JS и определяем их порядок подключения
-const jsFiles = [
-    './src/js/main.js'
-];
-
-// Получаем список файлов для копирования
-const src = {
-    copy_files: [
-        'src/*.html',
-        'src/uploads/*',
-    ]
-};
-
-// Получаем список файлов для отслеживания изменения HTML
-const htmlFiles = [
-    './src/*.html'
-];
-
+// Модуль (плагин) для sass
+const sass = require('gulp-sass');
 
 // *************************************************************************************** //
 // *************************************** Функции *************************************** //
 // *************************************************************************************** //
 
-// Функция на стили CSS
-function styles() {
-    return gulp.src(cssFiles)
-
-        // Конкатенация (Объединения) файлов CSS
-        .pipe(concat('style.css'))
-
-        // Добавить префиксы
-        .pipe(autoprefixer({
-            //browsers: ['last 2 versions'],
-            cascade: false
-        }))
-
-        // Минификация CSS
-        .pipe(cleanCSS({
-            level: 2
-        }))
-
-        // Копирование CSS в папку build
-        .pipe(gulp.dest('./build/css'))
-
-        // Отслеживания изменения CSS
-        .pipe(browserSync.stream())
+// Удалить всё в указанной папке
+function clean() {
+    return cleans(['assets/*'])
 }
 
-// Функция на скрипты JS
-function scripts() {
-    return gulp.src(jsFiles)
+// Функция для работы с файлами SCSS
+function styles() {
+    return gulp.src('./src/css/**/*.scss')
+        // Конкатенация (Объединения) файлов SCSS
+        .pipe(concat('main.css'))
 
-        // Конкатенация (Объединения) файлов CSS
-        .pipe(concat('script.js'))
+        //Минификация CSS
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+
+        // Копирование CSS в папку assets
+        .pipe(gulp.dest('./assets/css'))
+}
+
+// Функция для работы с файлами JS
+function scripts() {
+    return gulp.src('./src/js/**/*.js')
+
+        // Конкатенация (Объединения) файлов JS
+        .pipe(concat('main.js'))
 
         //Минификация JS
         .pipe(uglify({
             toplevel: true
         }))
 
-        // Копирование JS в папку build
-        .pipe(gulp.dest('./build/js'))
-
-        // Отслеживания изменения JS
-        .pipe(browserSync.stream())
+        // Копирование JS в папку assets
+        .pipe(gulp.dest('./assets/js'))
 }
 
-// Функция на файлы HTML
-function files() {
-    return gulp.src(htmlFiles)
-        // Прогоним через rigger
-        .pipe(rigger())
-
-        // Копирование HTML в папку build
-        .pipe(gulp.dest('./build/'))
+// Функция для работы с файлами img
+function copy_img() {
+    return gulp.src('./src/img/*')
+        // Копирование img в папку assets
+        .pipe(gulp.dest('./assets/img'))
 }
 
-
-// Удалить всё в указанной папке
-function clean() {
-    return cleans(['build/*'])
+// Функция для работы с файлами favicon
+function copy_favicon() {
+    return gulp.src('./src/favicon/*')
+        // Копирование favicon в папку assets
+        .pipe(gulp.dest('./assets/favicon'))
 }
 
+// Функция для работы с файлами fonts
+function copy_fonts() {
+    return gulp.src('./src/fonts/*')
+        // Копирование fonts в папку assets
+        .pipe(gulp.dest('./assets/fonts'))
+}
 
 // Просматривать файлы
 function watch() {
-    // Инициализация сервера
-    browserSync.init({
-        server: {
-            baseDir: "./build/"
-        }
-    });
-
-    // Следить за CSS файлами
-    gulp.watch('./src/css/**/*.css', styles);
-
     // Следить за JS файлами
     gulp.watch('./src/js/**/*.js', scripts);
 
-    // Следить за HTML файлами
-    gulp.watch("./src/*.html", files);
-    gulp.watch("./src/**/*.html", files);
+    // Следить за SCSS файлами
+    gulp.watch('./src/css/**/*.scss', styles);
 
-    // При изменении HTML запустить синхронизацию
-    gulp.watch("./src/*.html").on('change', browserSync.reload);
-    gulp.watch("./src/**/*.html").on('change', browserSync.reload);
+    // Следить за файлами img
+    gulp.watch('./src/img/**/*', copy_img);
+
+    // Следить за файлами favicon
+    gulp.watch('./src/favicon/**/*', copy_favicon);
+
+    // Следить за файлами fonts
+    gulp.watch('./src/fonts/**/*', copy_fonts);
 }
-
 
 // *************************************************************************************** //
 // **************************************** Таски **************************************** //
 // *************************************************************************************** //
 
-// Таск для Копирования картинок
-gulp.task('img', function () {
-    return gulp.src('src/img/**/*')
-        .pipe(gulp.dest('build/img'))
-})
+// Таск для очистки папки assets
+gulp.task('cleans', clean);
 
 // Таск вызывающий функцию styles
-gulp.task('styles', styles);
+gulp.task('sass', styles);
 
 // Таск вызывающий функцию scripts
 gulp.task('scripts', scripts);
 
-// Таск для очистки папки build
-gulp.task('cleans', clean);
+// Таск для Копирования картинок
+gulp.task('img', copy_img)
 
-// Таск для Копирования htaccess
-gulp.task('htaccess', function () {
-    return gulp.src('src/.htaccess')
-        .pipe(gulp.dest('build'))
-})
+// Таск для Копирования шрифтов
+gulp.task('fonts', copy_fonts);
 
 // Таск для Копирования favicon
-gulp.task('favicon', function () {
-    return gulp.src('src/favicon.ico')
-        .pipe(gulp.dest('build'))
-})
-
-// Таск для копирование файлов в build
-gulp.task('copyFiles', function () {
-    return gulp.src(src.copy_files)
-        // Прогоним через rigger
-        .pipe(rigger())
-
-        .pipe(gulp.dest(function (file) {
-            let path = file.base;
-            return path.replace('src', 'build');
-        }));
-});
+gulp.task('favicon', copy_favicon);
 
 // Таск для отслеживания изменений
 gulp.task('watch', watch);
 
-// Таск для удаления файлов в папке build и запуск styles и scripts
-gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts, "img", "htaccess", "favicon", "copyFiles")));
+// Таск для удаления файлов в папке assets и запуск styles и scripts
+gulp.task('build', gulp.series("cleans", gulp.parallel("scripts", "sass", "fonts", "favicon", "img")));
 
 // Таск запускает таск build и watch последовательно
-gulp.task('dev', gulp.series('build', 'watch'));
+gulp.task('default', gulp.series('build', 'watch'));

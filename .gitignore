@@ -33,7 +33,6 @@ wp-trackback.php
 xmlrpc.php
 temp.php
 
-/build/
 /node_modules/
 /package-lock.json
 /log/
